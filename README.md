@@ -22,3 +22,5 @@ Los comandos utilizados para la ejecución fueron
 El úncio problema que tuvimos fue que la terminal no reconocía los comandos porque no sabía qué path seguir. Para solucionarlo añadimos source /opt/ros/jazzy/setup.bash y 
 source /home/parallels/robotics_ws/install/setup.bash como comandos de source.
 
+Link video: https://drive.google.com/file/d/1XQLXccRVZ-kMWbbudjkbdo5Yb84sMIXH/view?usp=sharing
+
