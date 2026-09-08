@@ -9,12 +9,11 @@ Los dos nodos creados fueron:
 
 El primer nodo publica mensajes de tipo Float32 a través de un tópico llamado "velocity" con una cola de tamaño 10.
 
-El segundo nodo se susbcribe al tópico "velocity" y manda a llamar a la función velocity_callback siempre que reciba un mensaje i.e. el segundo nodo se mantiene escuchando el tópico de velocidad en espera de nuevos mensajes. 
+El segundo nodo se susbcribe al tópico "velocity" y manda a llamar a la función "velocity_callback" siempre que reciba un mensaje i.e. el segundo nodo se mantiene escuchando el tópico de velocidad en espera de nuevos mensajes. 
 
-Además, se añadieron entry_points en setup.py para poder ejecutar los programas de ambos nodos como parte del paquete de basics. Tambipen modificamos el package.xml con la información de nuestro nuevo paquete.
+Además, se añadieron entry_points en setup.py para poder ejecutar los programas de ambos nodos como parte del paquete de basics. También modificamos el package.xml con la información de nuestro nuevo paquete.
 
-Los comandos utilizados para la ejecución fueron 
-
+Los comandos utilizados para la ejecución fueron:
 - colcon build: para crear ("build") nuestro nuevo paquete basics
 - ros2 run basics velocity_publisher: para correr el nodo velocity_publisher, que publicará velocidades en el tópico "velocity".
 - ros2 run basics velocity_subscriber: en una segunda terminal, escuchará las velocidades publicadas en el tópico "velocity" y las imprime en la terminal.
