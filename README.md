@@ -1,10 +1,12 @@
 Elena Sofía Luna Palacio - 201041
 
+## Actividad 1: Publicador y subscritor de velocidad
+
 En esta actividad creamos nuestro primer paquete de ROS2 con un publisher, un nodo que publicara mensajes de velocidad, y un subscriber, un nodo que esperara estos mensajes.
 
 Los dos nodos creados fueron:
 
-- velocity_publsiher.py
+- velocity_publisher.py
 - velocity_subscriber.py
 
 El primer nodo publica mensajes de tipo Float32 a través de un tópico llamado "velocity" con una cola de tamaño 10.
@@ -23,3 +25,25 @@ source /home/parallels/robotics_ws/install/setup.bash como comandos de source.
 
 Link video: https://drive.google.com/file/d/1XQLXccRVZ-kMWbbudjkbdo5Yb84sMIXH/view?usp=sharing
 
+## Actividad 2: Publicador y subscritor de velocidad Turtlesim
+
+En esta actividad se modificaron los scripts de velocity_publisher.py y velocity_subscriber.py para adaptarlos a la simualación de Turtlesim y permitir que la tortuga se traslade (a través de mensajes con velocidad de traslación).
+
+En este caso el nodo velocity_turtle_pub (twist_publisher) se encargó de publicar mensajes de tipo "Twist" en el tópico "/turtle1/cmd_vel" cambiando la velocidad lineal del eje x (i.e. linear.x). El nodo velocity_turtle_subscriber (twist_subscriber) se subscribió al tópico "/turtle1/cmd_vel", esperando mensajes de velocidad para desplegar en la terminal.
+
+Se modificó la lógica del if-else original para que la velocidad aumentara de 0.0 a 1.2 (en incrementos de 0.1) y despúes detener a la tortuga. 
+
+La creación de ambos nodos se verificó con el comando **ros2 node list**. También se verificó la existencia del tópico en uso "/turtle1/cmd_vel" con el comando **ros2 topic list**.
+
+<img width="679" height="224" alt="image" src="https://github.com/user-attachments/assets/638b0029-8d7b-4ddf-a824-a19c2505a082" />
+
+
+Para la ejecución de los nodos se corrió en una terminal la simulación de la tortuga con el comando **ros2 run turtlesim turtlesim_node**. En una segunda terminal se mando a llamar al nodo velocity_turtle_pub (twist_publisher) a través del comando r**os2 run basics velocity_turtle_pub** y en una tercera terminal se llamó al nodo velocity_turtle_subscriber (twist_subscriber) con **ros2 run basics velocity_turtle_subscriber**.
+
+Además, con el comando **ros2 run rqt_graph rqt_graph** se generó un gráfico que muestra la interacción entre los nodos a través de los mensajes enviados en los tópicos.
+
+<img width="2506" height="1608" alt="image" src="https://github.com/user-attachments/assets/82403ff7-b364-48cd-81fd-d2e1fc97d7f6" />
+
+Observamos que el mensaje del publisher llega también al nodo turtlesim, lo que permite que se vea su movimiento en la interfaz.
+
+En este caso no hubo problemas con la ejecución de la actividad.
