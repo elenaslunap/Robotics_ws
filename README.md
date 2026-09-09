@@ -47,3 +47,5 @@ Además, con el comando **ros2 run rqt_graph rqt_graph** se generó un gráfico 
 Observamos que el mensaje del publisher llega también al nodo turtlesim, lo que permite que se vea su movimiento en la interfaz.
 
 En este caso no hubo problemas con la ejecución de la actividad.
+
+Link video: https://drive.google.com/file/d/1fjcIPTSw56PD0bqnGVxEW6cvgy9sYlKF/view?usp=sharing
