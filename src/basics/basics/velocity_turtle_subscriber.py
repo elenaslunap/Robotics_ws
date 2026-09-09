@@ -1,22 +1,22 @@
 import rclpy
 from rclpy.node import Node
-from std_msgs.msg import Float32
+from geometry_msgs.msg import Twist
 
 
-class VelocitySubscriber(Node):
+class VelocityTurtleSubscriber(Node):
 
     def __init__(self):
-        super().__init__('velocity_subscriber')
-        self.subscription_ = self.create_subscription(Float32,'/velocity',self.velocity_callback,10)
+        super().__init__('twist_subscriber')
+        self.subscription_ = self.create_subscription(Twist,'/turtle1/cmd_vel',self.twist_callback,10)
 
-    def velocity_callback(self, msg):
-        Velocity = msg.data
-        self.get_logger().info(f'Vel = {Velocity:.1f} m/s')
+    def twist_callback(self, msg):
+        linear_x = msg.linear.x
+        self.get_logger().info(f'msg.linear.x = {linear_x:.1f} m/s')
 
 
 def main(args = None):
     rclpy.init(args=args)
-    node = VelocitySubscriber()
+    node = VelocityTurtleSubscriber()
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()
