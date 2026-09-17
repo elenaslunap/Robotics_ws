@@ -49,3 +49,20 @@ Observamos que el mensaje del publisher llega también al nodo turtlesim, lo que
 En este caso no hubo problemas con la ejecución de la actividad.
 
 Link video: https://drive.google.com/file/d/1fjcIPTSw56PD0bqnGVxEW6cvgy9sYlKF/view?usp=sharing
+
+## Actividad 3: Ejemplo del LED
+
+El objetivo de esta práctica fue prender y apagar el led de la placa ESP32.
+
+Primero, se comprobó el funcionamiento de los cables y la placa corriendo el código de LED_serial.ino dentro del IDE de Arduino. Este código primero define al pin 2 (LED) como un output y luego, a través de un loop infinito, lee el valor que encuentre dentro del buffer de la comunicación serial. Si es un 1, manda un "HIGH" al output i.e. 3.3V y, si es un 0, manda 0V o un "LOW". 
+
+Una vez comprobado el funcionamiento de este código, se crearon dos nodos en ROS2. Primero, el nodo "led_blink", que se encarga de publicar mensajes de tipo Int32 a través del tópico "/led_command". Cada segundo este código aplica un XOR lógico al atributo de "estado" de la clase y lo publica como mensaje. Segundo, se creó el nodo "serial_bridge" el cual se suscribe a los mensajes del tópico "led_command" y abre un puerto de comunicación serial '/dev/ttyUSB0' con una velocidad de 115200 baudios. Cada que recibe un mensaje, llama a la función "led_callback", la cual manda el valor del mensaje recibido (0 o 1) al buffer de la comunicación serial utilizando "serial.write(b'{valor}\n')".
+
+En setup.py se incluyeron los entrypoints para ambos nodos:
+- 'led_blink = basics.led_blink:main'
+- 'serial_bridge = basics.serial_bridge:main'
+
+Además, para que se reconociera el puerto '/dev/ttyUSB0', se tuvieron que correr los comandos "ls /dev/ttyUSB*" y "sudo chmod 777 /dev/ttyUSB0".
+
+<img width="1206" height="588" alt="image" src="https://github.com/user-attachments/assets/7fe716e7-55cc-4315-bea2-ad3044783fc0" />
+
