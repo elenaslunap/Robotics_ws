@@ -50,9 +50,9 @@ En este caso no hubo problemas con la ejecución de la actividad.
 
 Link video: https://drive.google.com/file/d/1fjcIPTSw56PD0bqnGVxEW6cvgy9sYlKF/view?usp=sharing
 
-## Actividad 3: Ejemplo del LED
+## Actividad 3.1: Ejemplo del LED
 
-El objetivo de esta práctica fue prender y apagar el led de la placa ESP32.
+El objetivo de este ejercicio fue prender y apagar el led de la placa ESP32.
 
 Primero, se comprobó el funcionamiento de los cables y la placa corriendo el código de LED_serial.ino dentro del IDE de Arduino. Este código primero define al pin 2 (LED) como un output y luego, a través de un loop infinito, lee el valor que encuentre dentro del buffer de la comunicación serial. Si es un 1, manda un "HIGH" al output i.e. 3.3V y, si es un 0, manda 0V o un "LOW". 
 
@@ -65,4 +65,14 @@ En setup.py se incluyeron los entrypoints para ambos nodos:
 Además, para que se reconociera el puerto '/dev/ttyUSB0', se tuvieron que correr los comandos "ls /dev/ttyUSB*" y "sudo chmod 777 /dev/ttyUSB0".
 
 <img width="1206" height="588" alt="image" src="https://github.com/user-attachments/assets/7fe716e7-55cc-4315-bea2-ad3044783fc0" />
+
+## Actividad 3.2: Ejemplo con el potenciómetro
+
+El objetivo de este ejercicio fue mostrar el voltaje de salida del potenciómetro a través del analog-digital-converter (ADC).
+
+Primero, se cargó el programa de ADC_POT.ino en el IDE de Arduino. Este código primero define un puerto (en este caso POT 15), luego, en un loop infinito, lee el valor del voltaje que recibe de forma análoga a través del potenciómetro (que funciona como divisor del voltaje) y lo convierte a un valor numérico utilizando ADC. Como la placa ESP32 cuenta con 12 bits, el valor del voltaje se encontrará entre 0 y 4095 i.e de \$`2^0`\$ a (\$`2^{12}-1`\$).
+
+Luego se crearon dos nodos: "analog_serial_pub" y "analog_subs". El primero se encarga de publicar mensajes de tipo Int32 en el tópico "/analog". Además, crea una conexión con un puerto ('/dev/ttyUSB0') de comunicación serial y cada 0.01 segundos llama a la función "read_serial" la cual lee lo que encuentre en el buffer (una línea, para cuando encuentra \n), lo convierte a texto y elimina espacios, lo guarda en una variable "linea" y envía el contenido de esta variable al topico "/analog". 
+
+El nodo "analog_subs" crea una subscripción al mismo tópico y, siempre que reciba un mensaje, manda a llamar a la función "analog_callback". Esta extrae el dato del mensaje y lo imprime en la consola 'ADC = {valor}'. 
 
