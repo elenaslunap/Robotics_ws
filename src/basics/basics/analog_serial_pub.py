@@ -3,6 +3,7 @@ from rclpy.node import Node
 from std_msgs.msg import Int32
 import serial
 
+# Se comprobó el funcionamiento del ejemplo del potenciomentro
 
 class AnalogSerialPublisher(Node):
     def __init__(self):
