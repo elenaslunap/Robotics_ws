@@ -2,6 +2,8 @@ import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Int32
 
+# Se confirmó el funcionamiento del ejemplo del LED.
+
 # Define al nodo publisher "led_blink" 
 class LedBlink(Node):
     def __init__(self):
