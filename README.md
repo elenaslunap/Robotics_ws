@@ -66,6 +66,8 @@ Además, para que se reconociera el puerto '/dev/ttyUSB0', se tuvieron que corre
 
 <img width="1206" height="588" alt="image" src="https://github.com/user-attachments/assets/7fe716e7-55cc-4315-bea2-ad3044783fc0" />
 
+Link video: https://drive.google.com/file/d/1jnQ6Hkx0JnRXBd5Oytrx7ZafQxCj-8HG/view?usp=sharing
+
 ## Actividad 3.2: Ejemplo con el potenciómetro
 
 El objetivo de este ejercicio fue mostrar el voltaje de salida del potenciómetro a través del analog-digital-converter (ADC).
@@ -75,4 +77,6 @@ Primero, se cargó el programa de ADC_POT.ino en el IDE de Arduino. Este código
 Luego se crearon dos nodos: "analog_serial_pub" y "analog_subs". El primero se encarga de publicar mensajes de tipo Int32 en el tópico "/analog". Además, crea una conexión con un puerto ('/dev/ttyUSB0') de comunicación serial y cada 0.01 segundos llama a la función "read_serial" la cual lee lo que encuentre en el buffer (una línea, para cuando encuentra \n), lo convierte a texto y elimina espacios, lo guarda en una variable "linea" y envía el contenido de esta variable al topico "/analog". 
 
 El nodo "analog_subs" crea una subscripción al mismo tópico y, siempre que reciba un mensaje, manda a llamar a la función "analog_callback". Esta extrae el dato del mensaje y lo imprime en la consola 'ADC = {valor}'. 
+
+Link video: https://drive.google.com/file/d/1ldWNZiT1IJUy6tfld0qSlxnq1lR88lr2/view?usp=sharing
 
