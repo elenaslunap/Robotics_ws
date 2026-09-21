@@ -80,3 +80,19 @@ El nodo "analog_subs" crea una subscripción al mismo tópico y, siempre que rec
 
 Link video: https://drive.google.com/file/d/1ldWNZiT1IJUy6tfld0qSlxnq1lR88lr2/view?usp=sharing
 
+## Actividad 4: Joystick - Turtle Controller
+
+En esta actividad se utilizó el joystick para poder controlar el movimiento de la tortuga de turtlesim (movimiento lineal x y angular z)
+
+Primero se creó el archivo joystick.ino en el cual se definieron los puertos para la lectura de los valores x y y del ADC, lo cuales se encontraban en el rango 0 a 4095. Aquí también se pudo identificar el "centro" del joystick: 1850 en x y 1750 en y, es decir, los valores que aparecían cuando el joystick no estaba en movimiento. Tenían una variabilidad de aproximiadamente +-50, por lo que se consideró el valor de 100 para la zona muerte (para tener un pequeño "extra" en ambas direcciones).
+
+Despúes, se creó el nodo joystick_publisher, el cual leía los valores de la comunicación serial y los mandaba a través del tópico "/joystick" como un arreglo de Int32. Se comprobó su funcionamiento con el comando "ros2 topic echo /joystick" para observar los mensajes enviados por el tópico. Posteriormente se creó el tópico turtle_controller, el cual se suscribe al tópico "/joystick" y procesa los valores de las coordenadas x y y. Las normaliza con el centro que se encontró en el IDE del arduino, considerando si están adelante o atrás del centro para obtener valores entre 1 y -1. Asismismo, este nodo publica en el tópico "/turtle1/cmd_vel" mensajes de tipo Twist, multiplicando el valor normalizado por la velocidad máxima y mandandolos como valores de linear.x y angular.z para poder obtener una velocidad proporcional. Se eligió como velocidad máxima 5.0 (se empezó con 2.0, pero las vueltas se sentían lentas).
+
+Uno de los problemas a los que se enfentró fue que los movimientos estuvieran volteados y se solucionó incluyendo un menos uno al momento de multiplicar el valor normalizado por la velocidad máxima. Además, al principio se tardaba mucho en reflejar el movimiento del joystick en los valores numéricos de la consola. Para arreglarlo se redujo el delay del código del arduino y se leyó el último valor agregado al buffer serial en el joystick_publisher.
+
+Para comprobar la existencia de los topicos, los nodos y de las conexiones entre ellos se utilizaron los comandos: ros2 topic list, ros2 node list y os2 run rqt_graph rqt_graph.
+
+Link video: https://drive.google.com/file/d/1FGn5c-VW1rkncqe_SYZ-htDWKuNvRAt5/view?usp=sharing
+\
+Link video pt 2: https://drive.google.com/file/d/1VsNhr2AJOEGM_aN-j5KvuljnaPUv3I12/view?usp=sharing
+
