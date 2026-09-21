@@ -53,8 +53,8 @@ class TurtleController(Node):
         self.get_logger().info(f"Valores reales: x: {valor_x}, y: {valor_y} - Valores normalizados: x: {x}, y: {y}")
         
         twist = Twist()
-        twist.linear.x = -y * 2.0
-        twist.angular.z = -x * 2.0
+        twist.linear.x = -y * 5.0
+        twist.angular.z = -x * 5.0
         self.publisher_.publish(twist)
         
 def main(args = None):
