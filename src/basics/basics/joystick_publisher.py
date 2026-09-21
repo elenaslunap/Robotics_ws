@@ -6,6 +6,8 @@ import serial
 class JoystickPublisher(Node):
     def __init__(self):
     
+        # Se define el publicador 
+        # Manda mensajes de tipo Int32MultiArray al topico /joystick con una cola de tamaño 10
         super().__init__('joystick_publisher')
         
         self.publisher_ = self.create_publisher(
@@ -14,9 +16,11 @@ class JoystickPublisher(Node):
             10
         )
         
+        # Se inicia la comunicacion serial y se escribe un mensaje en la terminal
         self.serial_ = serial.Serial('/dev/ttyUSB0', 115200, timeout=1)
         self.get_logger().info('Se inicio la comunicacion serial')
         
+        # Se crea un timer que llama a read serial cada 0.5 segundos
         self.timer_ = self.create_timer(
             0.5,
             self.read_serial
@@ -24,7 +28,11 @@ class JoystickPublisher(Node):
         self.get_logger().info('Publisher de joystick iniciado')
 
     def read_serial(self):
-        
+        # Se lee el utlimo mensaje del buffer serial
+        # se lee toda la linea y se quitan sespacios, se convierte en string
+        # las lineas tienen formato: x,y
+        # se parten los valores en la , y guarda los valores en dos variables
+        # publica estos valores como un arreglo [x,y]
         while self.serial_.in_waiting > 0:
             linea = self.serial_.readline().decode().strip()
             valores = linea.split(',')

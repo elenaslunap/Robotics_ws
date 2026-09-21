@@ -3,11 +3,17 @@ from rclpy.node import Node
 from std_msgs.msg import Int32MultiArray
 from geometry_msgs.msg import Twist
 
+# Se define el "centro" del joystic, i.e. los valores que manda el joystick cuando no se esta moviento
 CENTRO_X = 1850
 CENTRO_Y = 1750
 
+
 class TurtleController(Node):
+
+
     def __init__(self):
+    
+        # se crea la subscripción al topico /joystick y recibirá mensajes de tipo Int32MultiArray
         super().__init__('turtle_controller')
         self.subscription_ = self.create_subscription(
             Int32MultiArray, 
@@ -15,6 +21,7 @@ class TurtleController(Node):
             self.joystick_callback,
             10
         )
+        # también se define como nodo publisher del topico /turtle1/cmd_vel y manda mensajes de tipo Twist
         self.publisher_ = self.create_publisher(
             Twist,
             '/turtle1/cmd_vel',
@@ -24,6 +31,11 @@ class TurtleController(Node):
         self.get_logger().info("Se inicio la suscripcion de joystick y el publisher de analog")
             
     def normalizar(self, valor, centro):
+        # define la distancia del valor al ventro del joystick
+        # si la distancia es menor a 100 (dead zone): regresa 0.0
+        # sino, define si es un valor mayor o menor al centro
+        # normaliza el valor con respecto al centro y obtiene valores entre -1 y 1
+        
         distancia = valor - centro
         
         if abs(distancia) < 100:
@@ -37,8 +49,14 @@ class TurtleController(Node):
             return distancia / centro
         
             
-            
+        
     def joystick_callback(self, msg):
+        # lee los valores de x y y que recibe del arreglo
+        # los normaliza con relación al centro del joystick
+        # escribe en la consola el valor real y el valor normalizado
+        # multiplica los valores normalizados por la velocidad máxima (5.0)
+        # publica los valores en los componentes linear.x y angular.z como mensajes de tipo Twist
+        
         if len(msg.data) < 2:
             return
             
