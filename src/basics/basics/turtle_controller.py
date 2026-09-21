@@ -26,7 +26,7 @@ class TurtleController(Node):
     def normalizar(self, valor, centro):
         distancia = valor - centro
         
-        if abs(distancia) < 100:
+        if abs(distancia) < 200:
             return 0.0
         # de que lado está nos dice como normalizar para obtener valores entre -1 y 1
         # del lado positivo
@@ -53,8 +53,8 @@ class TurtleController(Node):
         self.get_logger().info(f"Valores reales: x: {valor_x}, y: {valor_y} - Valores normalizados: x: {x}, y: {y}")
         
         twist = Twist()
-        twist.linear.x = -y * 2.0
-        twist.angular.z = -x * 2.0
+        twist.linear.x = -y * 5.0
+        twist.angular.z = -x * 5.0
         self.publisher_.publish(twist)
         
 def main(args = None):
