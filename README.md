@@ -96,3 +96,14 @@ Link video: https://drive.google.com/file/d/1FGn5c-VW1rkncqe_SYZ-htDWKuNvRAt5/vi
 \
 Link video pt 2: https://drive.google.com/file/d/1VsNhr2AJOEGM_aN-j5KvuljnaPUv3I12/view?usp=sharing
 
+## Actividad 5: Launch publisher y subscriber
+
+En esta actividad se creó un script launch.py para poder llamar tanto a velocity_publisher como a velocity_subscriber con un solo comando en una sola terminal (en vez de dos comandos distintos en dos terminales). Para lanzar cada nodo se especificó el paquete, el ejecutable y el output. Además, se tuvo que agregar la información del launcher en el área de los data files en setup.py.
+
+<img width="1227" height="783" alt="image" src="https://github.com/user-attachments/assets/f15334b2-a4bf-4c57-919f-b9cdd00bf8ac" />
+
+<img width="676" height="181" alt="image" src="https://github.com/user-attachments/assets/beda9854-35e1-4c8f-87b5-c7a7044a4972" />
+
+
+
+
