@@ -104,6 +104,8 @@ En esta actividad se creó un script launch.py para poder llamar tanto a velocit
 
 <img width="676" height="181" alt="image" src="https://github.com/user-attachments/assets/beda9854-35e1-4c8f-87b5-c7a7044a4972" />
 
+Link video: https://drive.google.com/file/d/1TrE6C0mhzS96YZfIc6G_1UTlTLdemzYM/view?usp=sharing
+
 
 
 
