@@ -106,6 +106,14 @@ En esta actividad se creó un script launch.py para poder llamar tanto a velocit
 
 Link video: https://drive.google.com/file/d/1TrE6C0mhzS96YZfIc6G_1UTlTLdemzYM/view?usp=sharing
 
+## Actividad 6: Launch turlte joy controller
 
+En esta actividad se creó un script turlte_joy_controller.launch.py en cual llama a los ejecutables de tres nodos distintos: joystick_publisher, turlte_controller y turtlesim, permitiendo ejecutar todo el sistema a través de un solo comando. Para lanzar cada nodo se especificó el paquete, el ejecutable y el output. Además, se tuvo que agregar la información del launcher en el área de los data files en setup.py:
 
+data_files=[
+        ('share/ament_index/resource_index/packages',
+            ['resource/' + package_name]),
+        ('share/' + package_name, ['package.xml']),
+        ('share/' + package_name + '/launch', ['launch/velocity_system.launch.py', 'launch/turtle_joy_controller.launch.py']), ]
 
+Link video: https://drive.google.com/file/d/1OijUMc8b917IEIgXWA6BVHq7PT5ZLL1H/view?usp=sharing
